@@ -18,6 +18,13 @@ x86/
 # Publish profile secrets
 *.pubxml.user
 
+# Publish profiles
+Properties/PublishProfiles/
+
+# Service dependencies
+Properties/ServiceDependencies/
+Properties/serviceDependencies*.json
+
 # Visual Studio
 .vs/
 *.csproj.user
