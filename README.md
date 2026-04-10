@@ -5,7 +5,7 @@ A simple ASP.NET Core Web API for managing students, built with .NET 10 and Azur
 ## Prerequisites
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
-- [SQL Server Developer/Community Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (free for educational use)
+- [SQL Server 2025 Developer](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (free for development and educational use)
 
 ## Clone the Repository
 
@@ -16,7 +16,7 @@ cd data2410-api-v1
 
 ## Local Database Setup
 
-Download and install [SQL Server Community Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) — it is **free for educational use**.
+Download and install [SQL Server 2025 Developer](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) — it is **free for development and educational use**.
 
 You can also install [SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/ssms/download-sql-server-management-studio-ssms) to manage your database visually.
 
@@ -27,7 +27,7 @@ Create a file named `appsettings.Development.json` in the project root (this fil
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=StudentsDb;Trusted_Connection=True;TrustServerCertificate=True;"
+    "DefaultConnection": "Server=localhost;Database=StudentsDb;User ID=sa;Password=YOUR_PASSWORD;TrustServerCertificate=True;"
   },
   "Logging": {
     "LogLevel": {
@@ -38,7 +38,7 @@ Create a file named `appsettings.Development.json` in the project root (this fil
 }
 ```
 
-> **Note:** If your SQL Server uses a named instance, update the `Server` value accordingly, e.g. `Server=localhost\\MSSQLSERVER`.
+> **Note:** Replace `sa` and `YOUR_PASSWORD` with the SQL Server credentials you configured during installation. If your SQL Server uses a named instance, update the `Server` value accordingly, e.g. `Server=localhost\\MSSQLSERVER`.
 
 The `Students` table is created automatically on startup — no manual database setup needed.
 
