@@ -26,7 +26,7 @@ def updateStudent(student_id):
 def deleteStudent(student_id):
     return delete_student(student_id)
 
-@app.route("/calculate-grades", methods=["GET"])
+@app.route("/api/Students/calculate-grades", methods=["GET"])
 def calculate_grades():
     grades = student_calculate_grades()
     for student in grades:
