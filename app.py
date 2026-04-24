@@ -36,5 +36,13 @@ def calculate_grades():
     # Returner alle studenter med karakterer
     return jsonify(students)
 
+@app.route('/api/Students/report', methods=['GET'])
+def course_wise_report():
+    return coursewise_report()
+
+@app.route('/health', methods=['GET'])
+def getHealth():
+    return get_health()
+
 if __name__ == "__main__":
     app.run(debug=True)
