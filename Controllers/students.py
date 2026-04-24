@@ -1,7 +1,10 @@
 from db.db import DatabaseManager
 from flask import Flask, jsonify
+from pathlib import Path
 
-database = DatabaseManager('../db/students.db')
+DB_PATH = Path(__file__).resolve().parents[1] / 'db' / 'students.db'
+database = DatabaseManager(str(DB_PATH))
+
 
 def getAllStudents():
     with database as cursor:
