@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 
-from Controllers.students import getAllStudents
+from Controllers.students import *
 
 app = Flask(__name__)
 
@@ -8,16 +8,24 @@ app = Flask(__name__)
 def get_students():
     return getAllStudents()
 
-@app.route('/api/Students/{id}', methods=['GET'])
-def get_studentID():
-    return getStudentbyID()
+@app.route('/api/Students/<int:student_id>', methods=['GET'])
+def get_student_by_id(student_id):
+    return getStudentById(student_id)
 
 @app.route('/api/Students', methods=['POST'])
-def create_Student():
+def createStudent():
     studentdata = request.get_json()
-    return create_Student(studentdata)
+    return create_student(studentdata)
 
-    
+@app.route('/api/Students/<int:student_id>', methods=['PUT'])
+def updateStudent(student_id):
+    studentdata = request.get_json()
+    return update_student(student_id, studentdata)
+
+@app.route('/api/Students/<int:student_id>', methods=['DELETE'])
+def deleteStudent(student_id):
+    return delete_student(student_id)
+
 @app.route("/calculate-grades", methods=["POST"])
 def calculate_grades():
 
