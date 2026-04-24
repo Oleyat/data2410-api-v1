@@ -60,17 +60,17 @@ def get_grade(marks):
 
 def coursewise_report():
     with database as cursor:
-        cursor.execute('SELECT COUNT(id) GROUP BY course')
+        cursor.execute('SELECT COUNT(id) FROM users GROUP BY course')
         course_students = cursor.fetchall()
-        cursor.execute('SELECT AVG(SUM(marks)) GROUP BY course')
+        cursor.execute('SELECT AVG(SUM(marks)) FROM users GROUP BY course')
         course_avgmarks = cursor.fetchall()
-        cursor.execute('SELECT COUNT(grade) WHERE grade="A" GROUP BY course')
+        cursor.execute('SELECT COUNT(grade) FROM users WHERE grade="A" GROUP BY course')
         course_gradesA = cursor.fetchall()
-        cursor.execute('SELECT COUNT(grade) WHERE grade="B" GROUP BY course')
+        cursor.execute('SELECT COUNT(grade) FROM users WHERE grade="B" GROUP BY course')
         course_gradesB = cursor.fetchall()
-        cursor.execute('SELECT COUNT(grade) WHERE grade="C" GROUP BY course')
+        cursor.execute('SELECT COUNT(grade) FROM users WHERE grade="C" GROUP BY course')
         course_gradesC = cursor.fetchall()
-        cursor.execute('SELECT COUNT(grade) WHERE grade="D" GROUP BY course')
+        cursor.execute('SELECT COUNT(grade) FROM users WHERE grade="D" GROUP BY course')
         course_gradesD = cursor.fetchall()
 
     return {
