@@ -33,5 +33,13 @@ def calculate_grades():
         update_grades(student["id"], student)
     return jsonify(grades)
 
+@app.route('/api/Students/report', methods=['GET'])
+def course_wise_report():
+    return coursewise_report()
+
+@app.route('/health', methods=['GET'])
+def getHealth():
+    return get_health()
+
 if __name__ == "__main__":
     app.run(debug=True)
