@@ -8,3 +8,11 @@ def getAllStudents():
         cursor.execute('SELECT * FROM users')
         students = cursor.fetchall()
         return jsonify([dict(student) for student in students])
+
+def getgrades(marks):
+    return (
+        "A" if marks >= 90 else
+        "B" if marks >= 80 else
+        "C" if marks >= 60 else
+        "D"
+    )
