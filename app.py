@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 
 from Controllers.students import getAllStudents
 
@@ -8,7 +8,6 @@ app = Flask(__name__)
 def get_students():
     return getAllStudents()
 
-<<<<<<< HEAD
 @app.route('/api/Students/{id}', methods=['GET'])
 def get_studentID():
     return getStudentbyID()
@@ -19,7 +18,6 @@ def create_Student():
     return create_Student(studentdata)
 
     
-=======
 @app.route("/calculate-grades", methods=["POST"])
 def calculate_grades():
 
@@ -29,7 +27,6 @@ def calculate_grades():
 
     # Returner alle studenter med karakterer
     return jsonify(students)
->>>>>>> 826a1f936a5ab6a3f3b41666bd8436bfe76dee15
 
 if __name__ == "__main__":
     app.run(debug=True)
