@@ -32,3 +32,8 @@ Properties/serviceDependencies*.json
 # PDF styling
 pdf-style.css
 data2410
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db/__pycache__/

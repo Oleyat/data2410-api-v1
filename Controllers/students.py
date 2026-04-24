@@ -1,7 +1,7 @@
 from db.db import DatabaseManager
 from flask import Flask, jsonify
 
-database = DatabaseManager('students.db')
+database = DatabaseManager('../db/students.db')
 
 def getAllStudents():
     with database as cursor:
