@@ -38,3 +38,4 @@ __pycache__/
 *.pyd
 db/__pycache__/
 *__pycache__*
+Controllers/__pycache__/students.cpython-312.pyc
