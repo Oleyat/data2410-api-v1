@@ -60,32 +60,30 @@ def get_grade(marks):
 
 def coursewise_report():
     with database as cursor:
-        cursor.execute('SELECT DISTINCT course FROM users')
-        course_name = cursor.fetchall()
-        cursor.execute('SELECT COUNT(id) FROM users GROUP BY course')
-        course_students = cursor.fetchall()
-        cursor.execute('SELECT AVG(total_marks) FROM (SELECT SUM(marks) as total_marks FROM users GROUP BY course)')
-        course_avgmarks = cursor.fetchall()
-        cursor.execute('SELECT COUNT(grade) FROM users WHERE grade="A" GROUP BY course')
-        course_gradesA = cursor.fetchall()
-        cursor.execute('SELECT COUNT(grade) FROM users WHERE grade="B" GROUP BY course')
-        course_gradesB = cursor.fetchall()
-        cursor.execute('SELECT COUNT(grade) FROM users WHERE grade="C" GROUP BY course')
-        course_gradesC = cursor.fetchall()
-        cursor.execute('SELECT COUNT(grade) FROM users WHERE grade="D" GROUP BY course')
-        course_gradesD = cursor.fetchall()
-
-    return {
-    "courseName": course_name,
-    "totalStudents": course_students,
-    "averageMarks": course_avgmarks,
-    "gradeDistribution": {
-        "A": course_gradesA,
-        "B": course_gradesB,
-        "C": course_gradesC,
-        "D": course_gradesD
-    }
-}
+        data = cursor.execute("""
+        SELECT 
+            course,
+            COUNT(id) AS total_students,
+            AVG(marks) AS average_marks,
+            SUM(CASE WHEN grade = 'A' THEN 1 ELSE 0 END) AS grade_A,
+            SUM(CASE WHEN grade = 'B' THEN 1 ELSE 0 END) AS grade_B,
+            SUM(CASE WHEN grade = 'C' THEN 1 ELSE 0 END) AS grade_C,
+            SUM(CASE WHEN grade = 'D' THEN 1 ELSE 0 END) AS grade_D
+        FROM users
+        GROUP BY course
+    """)
+        rows = cursor.fetchall()
+    report = []
+    for row in rows:    
+        report.append({
+            "courseName": row[0],
+            "totalStudents": row[1],
+            "averageMarks": round(row[2], 2),
+            "gradeDistribution": {
+                "A": row[3], "B": row[4], "C": row[5], "D": row[6]
+            }
+        })
+    return jsonify(report)
 
 def get_health():
     with database as cursor:
