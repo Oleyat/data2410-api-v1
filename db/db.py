@@ -19,5 +19,6 @@ class DatabaseManager:
             if not exc_type:
                 self.connection.commit()
             self.connection.close()
-
+    def commit(self):
+        self.connection.commit()
 
