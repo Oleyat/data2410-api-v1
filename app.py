@@ -8,6 +8,7 @@ app = Flask(__name__)
 def get_students():
     return getAllStudents()
 
+<<<<<<< HEAD
 @app.route('/api/Students/{id}', methods=['GET'])
 def get_studentID():
     return getStudentbyID()
@@ -18,6 +19,17 @@ def create_Student():
     return create_Student(studentdata)
 
     
+=======
+@app.route("/calculate-grades", methods=["POST"])
+def calculate_grades():
+
+    # Beregn og oppdater karakterer
+    for student in students:
+        student["grade"] = get_grade(student["marks"])
+
+    # Returner alle studenter med karakterer
+    return jsonify(students)
+>>>>>>> 826a1f936a5ab6a3f3b41666bd8436bfe76dee15
 
 if __name__ == "__main__":
     app.run(debug=True)
