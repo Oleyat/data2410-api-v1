@@ -26,15 +26,12 @@ def updateStudent(student_id):
 def deleteStudent(student_id):
     return delete_student(student_id)
 
-@app.route("/calculate-grades", methods=["POST"])
+@app.route("/calculate-grades", methods=["GET"])
 def calculate_grades():
-
-    # Beregn og oppdater karakterer
-    for student in students:
-        student["grade"] = get_grade(student["marks"])
-
-    # Returner alle studenter med karakterer
-    return jsonify(students)
+    grades = student_calculate_grades()
+    for student in grades:
+        update_grades(student["id"], student)
+    return jsonify(grades)
 
 if __name__ == "__main__":
     app.run(debug=True)

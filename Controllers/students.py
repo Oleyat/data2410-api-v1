@@ -39,7 +39,16 @@ def delete_student(student_id):
         database.commit()
         return jsonify({'message': 'Student deleted successfully'}), 200
 
+def student_calculate_grades():
+    students = getAllStudents().json
+    for student in students:
+        student["grade"] = get_grade(student["marks"])
+    return students
 
+def update_grades(student_id, student_data):
+    with database as cursor:
+        cursor.execute('UPDATE users SET grade = ? WHERE id = ?', (student_data['grade'], student_id))
+        database.commit()
 
 def get_grade(marks):
     return (
