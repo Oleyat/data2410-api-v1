@@ -12,7 +12,7 @@ def getAllStudents():
         students = cursor.fetchall()
         return jsonify([dict(student) for student in students])
 
-def getgrades(marks):
+def get_grade(marks):
     return (
         "A" if marks >= 90 else
         "B" if marks >= 80 else
