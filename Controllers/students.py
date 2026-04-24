@@ -12,6 +12,35 @@ def getAllStudents():
         students = cursor.fetchall()
         return jsonify([dict(student) for student in students])
 
+def getStudentById(student_id):
+    with database as cursor:
+        cursor.execute('SELECT * FROM users WHERE id = ?', (student_id,))
+        student = cursor.fetchone()
+        if student:
+            return jsonify(dict(student))
+        else:
+            return jsonify({'error': 'Student not found'}), 404
+
+def create_student(student_data):
+    with database as cursor:
+        cursor.execute('INSERT INTO users (name, course, marks) VALUES (?, ?, ?)', (student_data['name'], student_data['course'], student_data['marks']))
+        database.commit()
+        return jsonify({'message': 'Student created successfully'}), 201
+
+def update_student(student_id, student_data):
+    with database as cursor:
+        cursor.execute('UPDATE users SET name = ?, course = ?, marks = ? WHERE id = ?', (student_data['name'], student_data['course'], student_data['marks'], student_id))
+        database.commit()
+        return jsonify({'message': 'Student updated successfully'}), 200
+
+def delete_student(student_id):
+    with database as cursor:
+        cursor.execute('DELETE FROM users WHERE id = ?', (student_id,))
+        database.commit()
+        return jsonify({'message': 'Student deleted successfully'}), 200
+
+
+
 def get_grade(marks):
     return (
         "A" if marks >= 90 else
