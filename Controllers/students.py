@@ -57,3 +57,31 @@ def get_grade(marks):
         "C" if marks >= 60 else
         "D"
     )
+
+def coursewise_report():
+    with database as cursor:
+        cursor.execute('SELECT COUNT([DISTINCT] users) GROUP BY course')
+        course_students = cursor.fetchall()
+        cursor.execute('SELECT AVG(SUM(marks)) GROUP BY course')
+        course_avgmarks = cursor.fetchall()
+        cursor.execute('SELECT COUNT(grade) WHERE grade="A" GROUP BY course')
+        course_gradesA = cursor.fetchall()
+        cursor.execute('SELECT COUNT(grade) WHERE grade="B" GROUP BY course')
+        course_gradesB = cursor.fetchall()
+        cursor.execute('SELECT COUNT(grade) WHERE grade="C" GROUP BY course')
+        course_gradesC = cursor.fetchall()
+        cursor.execute('SELECT COUNT(grade) WHERE grade="D" GROUP BY course')
+        course_gradesD = cursor.fetchall()
+
+    return {
+    "courseName": ["course"],
+    "totalStudents": course_students,
+    "averageMarks": course_avgmarks,
+    "gradeDistribution": {
+        "A": course_gradesA,
+        "B": course_gradesB,
+        "C": course_gradesC,
+        "D": course_gradesD
+    }
+}
+
