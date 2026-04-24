@@ -57,3 +57,9 @@ def get_grade(marks):
         "C" if marks >= 60 else
         "D"
     )
+
+def get_health():
+    with database as cursor:
+        cursor.execute('SELECT 1')
+        return jsonify({'status': 'healthy'}), 200
+    return jsonify({'status': 'unhealthy'}), 500
