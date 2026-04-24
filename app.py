@@ -29,11 +29,9 @@ def deleteStudent(student_id):
 @app.route("/calculate-grades", methods=["POST"])
 def calculate_grades():
 
-    # Beregn og oppdater karakterer
     for student in students:
         student["grade"] = get_grade(student["marks"])
 
-    # Returner alle studenter med karakterer
     return jsonify(students)
 
 @app.route('/api/Students/report', methods=['GET'])
